@@ -4,7 +4,7 @@
 
 pkgname=xkeyboard-config-hhk
 pkgver=2.12
-pkgrel=1
+pkgrel=3
 pkgdesc="X keyboard configuration files with a patch for a layout emulating a happy hacking keyboard"
 arch=(any)
 license=('custom')
@@ -15,13 +15,14 @@ replaces=('xkeyboard-config' 'xkbdata')
 conflicts=('xkeyboard-config' 'xkbdata')
 source=(
 	http://xorg.freedesktop.org/archive/individual/data/${pkgname/-hhk/}/${pkgname/-hhk/}-${pkgver}.tar.bz2
-	git+https://github.com/muff1nman/hhk-emulate
+    hhk.patch
 )
-sha256sums=('65b62b95b77b609cb6c0439e0148c48c3ab7dcb5c90eb8d34cf1cb8f360cca44' 'SKIP')
+sha256sums=('65b62b95b77b609cb6c0439e0148c48c3ab7dcb5c90eb8d34cf1cb8f360cca44'
+'2bfa71b4297156bf948abea8c7bcd5b7c24986e3bbac7dbe5662ae7c1ea6cff0')
 
 prepare() {
 	cd ${srcdir}/${pkgname/-hhk/}-${pkgver}
-	patch -p1 < ${srcdir}/hhk-emulate/hhk.patch
+	patch -p1 < ${startdir}/hhk.patch
 }
 
 build() {
